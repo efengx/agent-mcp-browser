@@ -1,0 +1,49 @@
+
+
+
+services:
+
+  mcp-browser:
+    image: mcp-browser
+    container_name: mcp-browser
+    restart: always
+    command: --debug
+    ports:
+      - 5901:5901             # VNC Server
+      - 6901:6901             # noVNC Client
+      - 8088:8088             # Mcp-Playwright
+    environment:
+      - VNC_PW=headless
+      - DISPLAY=:0
+    networks:
+      - default
+      - shared-net
+
+  redis:
+    # ref: https://hub.docker.com/_/redis
+    image: redis:7-alpine # 7.4.0
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    volumes:
+      - redis:/data
+    networks:
+      - default
+      - shared-net
+
+volumes:
+  redis:
+    name: support_redis
+
+networks:
+  default:
+  shared-net:
+    name: shared-network
+    external: true
