@@ -206,8 +206,9 @@ main() {
     #     sleep infinity
     # fi
 
-    echo "Start supervisord: /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf"
-    exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+    echo "Start Command"
+    exec supervisord -c ./supervisord.conf
+    # exec npx -y @playwright/mcp@latest --config config/browser.json --no-sandbox
 }
 
 

@@ -1,23 +1,43 @@
-
-
-
 services:
 
-  mcp-browser:
+
+  # 获取视频地址
+  mcp-browser-video:
     image: mcp-browser
-    container_name: mcp-browser
+    container_name: mcp-browser-video
     restart: always
-    command: --debug
+    # command: --debug
     ports:
       - 5901:5901             # VNC Server
       - 6901:6901             # noVNC Client
-      - 8088:8088             # Mcp-Playwright
+      # - 8088:8088             # Mcp-Playwright
+      # - 8070:8070             # Mcp-auto-Playwright
     environment:
       - VNC_PW=headless
       - DISPLAY=:0
     networks:
       - default
       - shared-net
+
+
+  # 获取渠道地址
+  mcp-browser-channel:
+    image: mcp-browser
+    container_name: mcp-browser-channel
+    restart: always
+    # command: --debug
+    ports:
+      - 5902:5901             # VNC Server
+      - 6902:6901             # noVNC Client
+      # - 8088:8088             # Mcp-Playwright
+      # - 8070:8070             # Mcp-auto-Playwright
+    environment:
+      - VNC_PW=headless
+      - DISPLAY=:0
+    networks:
+      - default
+      - shared-net
+
 
   redis:
     # ref: https://hub.docker.com/_/redis
@@ -38,9 +58,11 @@ services:
       - default
       - shared-net
 
+
 volumes:
   redis:
     name: support_redis
+
 
 networks:
   default:

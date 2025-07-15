@@ -2,14 +2,14 @@
   "browser": {
     "browserName": "chromium",
     "isolated": false,
-    "userDataDir": "./my-browser-profile",
+    "userDataDir": "./my-playwright-profile",
     "launchOptions": {
-      "headless": false,
-      "disableFeatures": "ExternalProtocolDialog"
+      "headless": false
     },
     "contextOptions": {
       "ignoreHTTPSErrors": true
-    }
+    },
+    "cdpEndpoint": "http://localhost:9222"
   },
   "server": {
     "port": 8088,
