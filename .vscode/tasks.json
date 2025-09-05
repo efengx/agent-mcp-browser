@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "启动Chrome调试模式",
+      "type": "shell",
+      "command": "${workspaceFolder}/script/start-chrome-playwright.sh",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": ".",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^启动Chrome调试模式",
+          "endsPattern": "^设置完成！"
+        }
+      }
+    },
+    {
+      "label": "运行Playwright测试(UI模式)",
+      "type": "shell",
+      "command": "npx playwright test --ui --config=${workspaceFolder}/playwright.config.ts",
+      "dependsOn": "启动Chrome调试模式",
+      "isBackground": false,
+      "problemMatcher": []
+    },
+    {
+      "label": "一键启动Chrome+Playwright",
+      "dependsOrder": "sequence",
+      "dependsOn": ["启动Chrome调试模式", "运行Playwright测试(UI模式)"],
+      "problemMatcher": []
+    }
+  ]
+}

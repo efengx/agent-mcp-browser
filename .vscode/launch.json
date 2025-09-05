@@ -1,0 +1,88 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "一键启动 Chrome+Playwright",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "${workspaceFolder}/script/start-chrome-playwright.sh"
+      ],
+      "preLaunchTask": "",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "连接本地 Chrome (CDP + 追踪)",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "trace": true
+    },
+    {
+      "name": "Playwright Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "playwright",
+        "test",
+        "--ui"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Playwright Tests (连接远程浏览器)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "playwright",
+        "test",
+        "--ui",
+        "--config=${workspaceFolder}/playwright.config.ts"
+      ],
+      "env": {
+        "DEBUG": "pw:api"
+      },
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug Playwright Test",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "playwright",
+        "test",
+        "--debug",
+        "${fileBasename}"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "FastMCP Server (Conda)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "/usr/local/Caskroom/miniconda/base/envs/browser-use/bin/fastmcp",
+      "args": [
+          "run",
+          "--transport", "sse",
+          "--host", "0.0.0.0",
+          "--port", "8000",
+          "mcp-server.py"
+      ],
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
+  ]
+}

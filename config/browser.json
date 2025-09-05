@@ -2,17 +2,24 @@
   "browser": {
     "browserName": "chromium",
     "isolated": false,
-    "userDataDir": "./my-browser-profile",
+    "userDataDir": "/root/my-browser-profile",
     "launchOptions": {
       "headless": false,
-      "disableFeatures": "ExternalProtocolDialog"
+      "disableFeatures": "ExternalProtocolDialog",
+      "downloadsPath": "/root/file",
+      "tracesDir": "/root/traces",
+      "executablePath": "/usr/bin/google-chrome",
+      "startFullscreen": false
     },
     "contextOptions": {
-      "ignoreHTTPSErrors": true
+      "ignoreHTTPSErrors": true,
+      "viewport": { "width": 1920, "height": 1080 }
     }
   },
   "server": {
     "port": 8088,
     "host": "0.0.0.0"
-  }
+  },
+  "capabilities": ["tabs", "install", "pdf", "vision"],
+  "outputDir": "/root/file/output"
 }

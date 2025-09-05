@@ -1,42 +1,106 @@
 services:
 
 
-  # 获取视频地址
-  mcp-browser-video:
-    image: mcp-browser
-    container_name: mcp-browser-video
+  # # 获取视频地址
+  # mcp-browser-video:
+  #   image: mcp-browser
+  #   container_name: mcp-browser-video
+  #   restart: always
+  #   # command: --debug
+  #   ports:
+  #     - 5901:5901             # VNC Server
+  #     - 6901:6901             # noVNC Client
+  #     # - 8088:8088             # Mcp-Playwright
+  #     # - 8070:8070             # Mcp-auto-Playwright
+  #   environment:
+  #     - VNC_PW=headless
+  #     - DISPLAY=:0
+  #   networks:
+  #     - default
+  #     - shared-net
+
+
+  # # 获取渠道地址
+  # mcp-browser-channel:
+  #   image: mcp-browser
+  #   container_name: mcp-browser-channel
+  #   restart: always
+  #   # command: --debug
+  #   ports:
+  #     - 5902:5901             # VNC Server
+  #     - 6902:6901             # noVNC Client
+  #     # - 8088:8088             # Mcp-Playwright
+  #     # - 8070:8070             # Mcp-auto-Playwright
+  #   environment:
+  #     - VNC_PW=headless
+  #     - DISPLAY=:0
+  #   networks:
+  #     - default
+  #     - shared-net
+
+
+  mcp-browser-hailuoai-channel-3:
+    # image: mcp-browser
+    image: registry.cn-hangzhou.aliyuncs.com/rjxai/mcp-browser:0.0.5
+    container_name: mcp-browser-hailuoai-channel-3
     restart: always
     # command: --debug
     ports:
-      - 5901:5901             # VNC Server
-      - 6901:6901             # noVNC Client
-      # - 8088:8088             # Mcp-Playwright
-      # - 8070:8070             # Mcp-auto-Playwright
+      # - "5903:5901"             # VNC Server
+      - "6903:6901"             # noVNC Client
+      - "1723:22"               # ssh 端口, 用于关闭被占用的浏览器
+      - "8083:8088"             # Mcp-Playwright
+      # - "8089:8089"             # Test Mcp-Playwright
+      - "8003:8000"             # Mcp-Browser-Use
     environment:
-      - VNC_PW=headless
-      - DISPLAY=:0
+      - "VNC_PW=headless"
+      - "DISPLAY=:1"
+      - "LANG=en_US.UTF-8"
+      - "LANGUAGE=en_US:en"
+      - "LC_ALL=en_US.UTF-8"
+      - "BROWSER_USE_LOGGING_LEVEL=info"
+    env_file:
+      - .env
+    volumes:
+      - "./data:/root/data"
+      # 缓存本地浏览器事件
+      - "./browser-profile-3:/root/browser-profile"
+      - "./browser-profile-4:/root/my-browser-profile"
+      - "./file:/root/file"
+      - "./download:/root/Downloads"
+      - "./output:/root/output/"
+      - "./traces:/root/traces"
     networks:
       - default
       - shared-net
 
 
-  # 获取渠道地址
-  mcp-browser-channel:
-    image: mcp-browser
-    container_name: mcp-browser-channel
-    restart: always
-    # command: --debug
-    ports:
-      - 5902:5901             # VNC Server
-      - 6902:6901             # noVNC Client
-      # - 8088:8088             # Mcp-Playwright
-      # - 8070:8070             # Mcp-auto-Playwright
-    environment:
-      - VNC_PW=headless
-      - DISPLAY=:0
-    networks:
-      - default
-      - shared-net
+  # mcp-browser-hailuoai-channel-4:
+  #   image: mcp-browser
+  #   container_name: mcp-browser-hailuoai-channel-4
+  #   restart: always
+  #   # command: --debug
+  #   ports:
+  #     # - "5903:5901"             # VNC Server
+  #     - "6904:6901"             # noVNC Client
+  #     # - "1724:22"               # ssh 端口, 用于关闭被占用的浏览器
+  #     - "8084:8088"             # Mcp-Playwright
+  #   environment:
+  #     - "VNC_PW=headless"
+  #     - "DISPLAY=:1"
+  #     - "LANG=en_US.UTF-8"
+  #     - "LANGUAGE=en_US:en"
+  #     - "LC_ALL=en_US.UTF-8"
+  #   volumes:
+  #     - "./data:/root/data"
+  #     # 缓存本地浏览器事件
+  #     - "./browser-profile-4:/root/my-browser-profile"
+  #     - "./file:/root/file"
+  #     - "./traces:/root/traces"
+  #     # - "./file/output:/root/file/output"
+  #   networks:
+  #     - default
+  #     - shared-net
 
 
   redis:
