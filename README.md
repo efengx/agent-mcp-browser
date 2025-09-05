@@ -92,7 +92,3 @@ docker push registry.cn-hangzhou.aliyuncs.com/rjxai/n8n:latest
 - 可以查看测试执行过程并进行调试
 - 支持UI模式下的实时交互
 - 测试执行在已打开的Chrome实例中进行，可以保留登录状态和Cookies
-
-
-## runpod cantor ssh
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFF1V9Dir1D8ZhWpWEWngx6kfo2Wcvu+KDE4Jxa7N5w4 cantorfan@gmail.com
