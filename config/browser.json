@@ -2,6 +2,7 @@
   "browser": {
     "browserName": "chromium",
     "isolated": false,
+<<<<<<< HEAD
     "userDataDir": "/root/my-browser-profile",
     "launchOptions": {
       "headless": false,
@@ -15,6 +16,16 @@
       "ignoreHTTPSErrors": true,
       "viewport": { "width": 1920, "height": 1080 }
     }
+=======
+    "userDataDir": "./my-playwright-profile",
+    "launchOptions": {
+      "headless": false
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
+    },
+    "cdpEndpoint": "http://localhost:9222"
+>>>>>>> parent of 60afcdd (feat: playwright mcp tool)
   },
   "server": {
     "port": 8088,

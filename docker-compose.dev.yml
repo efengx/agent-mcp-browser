@@ -44,7 +44,7 @@ services:
     image: registry.cn-hangzhou.aliyuncs.com/rjxai/mcp-browser:0.0.5
     container_name: mcp-browser-hailuoai-channel-3
     restart: always
-    # command: --debug
+    command: --debug
     ports:
       # - "5903:5901"             # VNC Server
       - "6903:6901"             # noVNC Client
@@ -122,11 +122,9 @@ services:
       - default
       - shared-net
 
-
 volumes:
   redis:
     name: support_redis
-
 
 networks:
   default:

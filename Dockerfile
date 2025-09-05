@@ -1,4 +1,4 @@
-FROM accetto/ubuntu-vnc-xfce-chromium-g3:latest
+FROM accetto/ubuntu-vnc-xfce-chromium-g3
 
 USER root
 WORKDIR /root/app
@@ -40,7 +40,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list.d/u
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js using NodeSource PPA
-RUN  mkdir -p /etc/apt/keyrings \
+RUN chmod +x /dockerstartup/startup.sh \
+    && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
     && apt-get update && apt-get install nodejs -y \

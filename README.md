@@ -1,4 +1,4 @@
-# Agent Mcp Browser
+# Agent Mcp Browser Use
 
 Natural language driven internet recognition and manipulation project
 
@@ -8,30 +8,31 @@ Natural language driven internet recognition and manipulation project
 
 - **Key Technology**: Browser + Playwright Mcp + local deployment n8n
 
+
 ## Quick Start
 
 ### Download project
 
 ```
-git clone 
+git clone https://github.com/efengx/agent-mcp-browser.git
 ```
 
 ### Install image
 
 ```
--- 使用docker hub sse(无法使用)
+<!-- 使用docker hub sse(无法使用) -->
 docker mcp gateway run --port 8080 --host 0.0.0.0  --transport sse
 
--- 无头模式
+<!-- 无头模式 -->
 npx playwright test --ui
 
--- 有头模式
+<!-- 有头模式 -->
 npx playwright test --headed
 
--- 启动mcp服务
+<!-- 启动mcp服务 -->
 fastmcp run --transport sse --host 0.0.0.0 --port 8000 mcp-server.py
 
--- 启动服务检查
+<!-- 启动服务检查 -->
 <!-- typescript -->
 npx playwright codegen --browser chromium --channel chrome --user-data-dir /Users/mfeng/Documents/world/feng_ai/mcp-server/agent-mcp-browser/codegen-profile
 <!-- python -->
@@ -39,17 +40,14 @@ uv run playwright codegen --user-data-dir /root/my-browser-profile
 uv run playwright codegen --browser chromium --channel chrome
 
 
--- 打包
+<!-- 打包 -->
 docker build -t registry.cn-hangzhou.aliyuncs.com/rjxai/mcp-browser:0.0.5 .
 docker push registry.cn-hangzhou.aliyuncs.com/rjxai/mcp-browser:0.0.5
 
--- 本地构建
+<!-- 本地构建 -->
 docker compose -p support -f docker-compose.dev.yml up -d
 
--- 远程构建
-docker login --username=heiyexinghai registry.cn-hangzhou.aliyuncs.com
-<!-- password: fengX_429 -->
-
+<!-- 远程构建 -->
 docker-compose -p support -f works/support/docker-compose.dev.yml pull
 docker-compose -p support -f works/support/docker-compose.dev.yml up -d
 ```
